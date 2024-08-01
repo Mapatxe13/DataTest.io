@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${header}
                 <br>
                 <select class="column-type">
+                    <option value="na">N/A</option>
                     <option value="numerica">Numérica</option>
                     <option value="categorica">Categórica</option>
                 </select>
