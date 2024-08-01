@@ -63,11 +63,13 @@ input[type="file"] {
     border: 1px solid #ddd;
     padding: 10px;
     background: #fafafa;
+    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: auto; /* Permite que la tabla ajuste el ancho de las columnas */
 }
 
 table, th, td {
@@ -85,4 +87,5 @@ th {
 
 select {
     margin: 5px 0;
+    padding: 2px;
 }
