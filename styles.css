@@ -1,13 +1,59 @@
 /* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-/* ... otros estilos ... */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
 
 /* Sección de Cargar CSV */
 #cargar-csv {
     margin-top: 20px;
 }
 
-#fileInput {
+#separator, #decimalSeparator, #thousandsSeparator {
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+    width: 200px;
+}
+
+input[type="file"] {
     display: block;
     margin: 10px 0;
 }
