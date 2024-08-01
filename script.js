@@ -49,17 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const headers = rows[0].split(separator);
         headers.forEach(header => {
             const th = document.createElement('th');
-            th.textContent = header;
+            th.innerHTML = `
+                ${header}
+                <br>
+                <select class="column-type">
+                    <option value="numerica">Numérica</option>
+                    <option value="categorica">Categórica</option>
+                </select>
+            `;
             headerRow.appendChild(th);
         });
-
-        // Add an extra header for the variable type dropdowns
-        const typeHeader = document.createElement('th');
-        typeHeader.textContent = 'Tipo de Variable';
-        headerRow.appendChild(typeHeader);
         table.appendChild(headerRow);
 
-        // Create table rows and type dropdowns
+        // Create table rows
         rows.slice(1).forEach(row => {
             if (row.trim()) {
                 const tr = document.createElement('tr');
@@ -69,17 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     td.textContent = cell;
                     tr.appendChild(td);
                 });
-
-                // Add dropdown for type selection
-                const typeTd = document.createElement('td');
-                const select = document.createElement('select');
-                select.innerHTML = `
-                    <option value="numerica">Numérica</option>
-                    <option value="categorica">Categórica</option>
-                `;
-                typeTd.appendChild(select);
-                tr.appendChild(typeTd);
-
                 table.appendChild(tr);
             }
         });
