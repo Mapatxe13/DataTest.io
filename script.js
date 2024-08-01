@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('fileInput');
     const csvPreviewDiv = document.getElementById('csvPreview');
+    const separatorInput = document.getElementById('separator');
+    const decimalSeparatorInput = document.getElementById('decimalSeparator');
+    const thousandsSeparatorInput = document.getElementById('thousandsSeparator');
 
     fileInput.addEventListener('change', handleFileSelect);
 
@@ -10,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const contents = e.target.result;
-                displayCSV(contents);
+                const separator = separatorInput.value || ',';
+                const decimalSeparator = decimalSeparatorInput.value || '.';
+                const thousandsSeparator = thousandsSeparatorInput.value || ',';
+                displayCSV(contents, separator, decimalSeparator, thousandsSeparator);
             };
             reader.readAsText(file);
         } else {
@@ -18,15 +24,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function displayCSV(contents) {
-        const rows = contents.split('\n');
+    function displayCSV(contents, separator, decimalSeparator, thousandsSeparator) {
+        // Replace thousands separator and parse numbers correctly
+        let rows = contents.split('\n');
         if (rows.length === 0) return;
+
+        // Replace thousands separators and convert to numbers if needed
+        rows = rows.map(row => {
+            return row.split(separator).map(cell => {
+                if (decimalSeparator === ',' && cell.includes('.')) {
+                    cell = cell.replace('.', '');
+                }
+                if (decimalSeparator === ',' && cell.includes(',')) {
+                    cell = cell.replace(',', '.');
+                }
+                return cell;
+            }).join(separator);
+        });
 
         const table = document.createElement('table');
         const headerRow = document.createElement('tr');
 
         // Create table headers and dropdowns
-        const headers = rows[0].split(',');
+        const headers = rows[0].split(separator);
         headers.forEach(header => {
             const th = document.createElement('th');
             th.textContent = header;
@@ -43,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rows.slice(1).forEach(row => {
             if (row.trim()) {
                 const tr = document.createElement('tr');
-                const cells = row.split(',');
+                const cells = row.split(separator);
                 cells.forEach(cell => {
                     const td = document.createElement('td');
                     td.textContent = cell;
