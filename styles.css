@@ -12,7 +12,7 @@
     margin: 10px 0;
 }
 
-#csvData {
+#csvPreview {
     margin-top: 20px;
     border: 1px solid #ddd;
     padding: 10px;
@@ -35,4 +35,8 @@ th, td {
 
 th {
     background-color: #f4f4f4;
+}
+
+select {
+    margin: 5px 0;
 }
